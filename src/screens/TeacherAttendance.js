@@ -83,7 +83,7 @@ const TeacherAttendance = ({ navigation }) => {
             source={require("../../Images/calender.png")}
             style={{ height: 22, marginTop: -5, width: 22, marginRight: 9 }}
           />
-          <Text style={{ color: "#2196F3", fontSize: 17 }}>{x}</Text>
+          <Text style={{ color: "#2196F3", fontSize: 16 }}>{x}</Text>
         </View>
       </TouchableOpacity>
 
@@ -232,14 +232,14 @@ const styles = StyleSheet.create({
   rowContainer: {
     display: "flex",
     flexDirection: "row",
-    marginHorizontal: 5,
+    marginHorizontal: 10,
     marginTop: 10,
     marginBottom: 5,
     paddingHorizontal: 10,
     paddingVertical: 15,
     backgroundColor: "white",
     borderRadius: 10,
-    elevation: 4,
+    elevation: 2,
   },
   rowImage: {
     backgroundColor: "#CDDDF5",

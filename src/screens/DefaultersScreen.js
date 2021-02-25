@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: "bold",
-    fontSize: 25,
+    fontSize: 22,
     marginLeft:"11%",
     borderTopRightRadius: 13,
     borderTopLeftRadius: 13,
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
   },
   val: {
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 23,
     color: "black",
    // color: "#2196F3",
   },

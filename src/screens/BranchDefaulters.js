@@ -26,7 +26,7 @@ const BranchDefaulters = ({ navigation }) => {
   async function getdata() {
     setLoader(true);
     await fetch(
-      `https://soop.io/api/v1/school_owner/fees/defaulters/13?branch_id=13`,
+      `https://soop.io/api/v1/school_owner/fees/defaulters/${myid}?branch_id=${bID}`,
       {
         method: "GET",
       }

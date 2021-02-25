@@ -8,15 +8,15 @@ import {
   Image,
   StyleSheet,
   Alert,
+  Pressable,
 } from "react-native";
 import { FlatList } from "react-native";
-import Defaulter_CollectionRow from "../../Components/Defaulter_CollectionRow";
-import CollectionHeader from "../../Components/CollectionHeader";
+import Defaulter_CollectionHeader from "../../Components/Defaulter_CollectionHeader";
 
 const Collections = ({ navigation }) => {
   const myid = navigation.getParam("id");
-  const [startDate, setStartDate] = useState("Pick a Date");
-  const [endDate, setEndDate] = useState("Pick a Date");
+  const [startDate, setStartDate] = useState("Start Date");
+  const [endDate, setEndDate] = useState("End Date");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDatePickerVisible2, setDatePickerVisibility2] = useState(false);
   const [items, setItems] = useState([]);
@@ -52,7 +52,7 @@ const Collections = ({ navigation }) => {
     setDatePickerVisibility2(false);
   };
   async function getData() {
-    if (startDate === "Pick a Date" || endDate == "Pick a Date") {
+    if (startDate === "Start Date" || endDate == "End Date") {
       Alert.alert(
         "Invalid Dates",
         "You have selected Invalid Dates. Please select dates Correctly first and then try again later. ",
@@ -102,31 +102,28 @@ const Collections = ({ navigation }) => {
 
   return (
     <View style={{ height: "100%" }}>
-      <CollectionHeader
-        heading1="Amount Received"
-        heading2="Total Paid"
-        val2={totalPaid}
-        val1={amountReceived}
+       <Defaulter_CollectionHeader
+          heading1="Amount Received"
+          heading2="Total Paid"
+          val2={totalPaid}
+          val1={amountReceived}
       />
+     
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.datePickBtn}
           onPress={() => setDatePickerVisibility(true)}
         >
-          <Text style={{ color: "#fff", fontSize: 15, flex: 1 }}>
-            Start Date
-          </Text>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image
               source={require("../../Images/calender.png")}
               style={{
-                height: 22,
-                marginTop: -5,
-                width: 22,
-                marginRight: 9,
+                height: 15,
+                width: 15,
+                marginRight: 5,
               }}
             />
-            <Text style={{ color: "#fff", fontSize: 15 }}>{startDate}</Text>
+            <Text style={{ color: "#2196F3", fontSize: 14 }}>{startDate}</Text>
           </View>
         </TouchableOpacity>
 
@@ -140,13 +137,13 @@ const Collections = ({ navigation }) => {
           style={styles.datePickBtn}
           onPress={() => setDatePickerVisibility2(true)}
         >
-          <Text style={{ color: "#fff", fontSize: 15, flex: 1 }}>End Date</Text>
+        
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image
               source={require("../../Images/calender.png")}
-              style={{ height: 22, marginTop: -5, width: 22, marginRight: 9 }}
+              style={{ height: 15,  width: 15, marginRight: 5 }}
             />
-            <Text style={{ color: "#fff", fontSize: 15 }}>{endDate}</Text>
+            <Text style={{ color: "#2196F3", fontSize: 14 }}>{endDate}</Text>
           </View>
         </TouchableOpacity>
 
@@ -157,7 +154,10 @@ const Collections = ({ navigation }) => {
           onCancel={() => setDatePickerVisibility2(false)}
         />
         <TouchableOpacity style={styles.fetchbtn} onPress={() => getData()}>
-          <Text style={{ color: "#fff", fontSize: 18 }}>Fetch Data</Text>
+          <Image
+                    source={require("../../Images/arrow1.png")}
+                    style={{width:30, height:30}}
+                    />
         </TouchableOpacity>
       </View>
       {loader && (
@@ -169,7 +169,7 @@ const Collections = ({ navigation }) => {
           }}
         />
       )}
-      {!loader && noData && (
+      {/* {!loader && noData && (
         <>
           <Image
             source={require("../../Images/thanks.png")}
@@ -195,30 +195,42 @@ const Collections = ({ navigation }) => {
             them so please check back later.
           </Text>
         </>
-      )}
+      )} */}
       {!loader && (
         <FlatList
-          style={{
-            marginHorizontal: 5,
-            marginVertical: 7,
-            height: "51%",
-            paddingHorizontal: 3,
-            borderLeftColor: "grey",
-            borderRightColor: "grey",
-            borderLeftWidth: 0.8,
-            borderRightWidth: 0.8,
-          }}
+        style={{ marginHorizontal: 5, marginVertical: 10, height: "78%",backgroundColor:"#f5f5f5" }}
           keyExtractor={(item, index) => item.id + ""}
           data={items}
           renderItem={({ item }) => {
             return (
-              <Defaulter_CollectionRow
-                amount={item.amount_received}
-                name={item.name}
-                defaulters={item.total_paid}
-                head1="Amount Received"
-                head2="Total Paid"
-              />
+              <Pressable style={styles.itemCon} onPress={()=>{
+                navigation.navigate("branchCollection",{
+                  myID:myid,
+                  bID:item.id,
+                  sdate:startDate,
+                  edate:endDate
+
+                })
+              }}>
+                 <Text style={styles.name}>{item.name}</Text>
+                  <View style={styles.innerCon}>
+                    <View style={styles.block}>
+                      <Text style={styles.val}>{item.amount_received}</Text>
+                      <Text style={styles.valname}>Total Amount</Text>
+                    </View>
+
+                    <View style={styles.block}>
+                      <Text style={styles.val}>{item.total_paid}</Text>
+                      <Text style={styles.valname}>Total Paid</Text>
+                    </View>
+                    <View style={{ flexDirection:"column", justifyContent:"center"}}>
+                    <Image
+                    source={require("../../Images/arrow.png")}
+                    style={{width:15, height:15}}
+                    />
+                    </View>
+                  </View>
+              </Pressable>
             );
           }}
         />
@@ -229,36 +241,80 @@ const Collections = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   datePickBtn: {
-    height: "23%",
-    width: "80%",
-    flexDirection: "row",
-    borderRadius: 25,
-    backgroundColor: "#0a043c",
-    paddingHorizontal: 25,
+    height: 40,
+    width: "32%",
+    borderRadius: 5,
+    backgroundColor: "#E3F2FD",
+    paddingHorizontal: 5,
     paddingVertical: 7,
-    marginTop: 10,
     alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
-    elevation: 6,
+    elevation: 10,
+    zIndex: 999,
   },
   fetchbtn: {
-    height: "23%",
-    width: "60%",
+    height: 40,
+    width: "15%",
     borderRadius: 5,
-    backgroundColor: "#0a043c",
-    paddingHorizontal: 25,
-    paddingVertical: 7,
-    marginTop: 10,
+    backgroundColor: "#004EE0",
     alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
   },
   container: {
-    backgroundColor: "#163b70",
-    height: "23%",
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
+    height: "10%",
+    flexDirection:"row",
+    marginLeft:"8%",
+    marginRight:"8%",
+    borderRadius:20,
+    justifyContent:"space-evenly",
+    backgroundColor:"#ffffff",
+    alignItems:"center"
+  },
+  name: {
+    fontWeight: "bold",
+    fontSize: 22,
+    marginLeft:"11%",
+    borderTopRightRadius: 13,
+    borderTopLeftRadius: 13,
+    paddingVertical: 3,
+    color: "#000",
+  },
+  itemCon: {
+    flexDirection: "column",
+    borderRadius: 10,
+    marginHorizontal: 7,
+    marginVertical: 3,
+    backgroundColor: "#f4f4f4",
+  },
+  innerCon: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    backgroundColor:"#ffffff",
+    marginHorizontal:"8%",
+    borderRadius:25
+  },
+  block: {
+    backgroundColor: "#ffffff",
+    borderRadius: 14,
+    marginVertical: 10,
+    paddingVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "40%",
+  },
+  val: {
+    fontWeight: "bold",
+    fontSize: 22,
+    color: "black",
+   // color: "#2196F3",
+  },
+  valname: {
+    fontWeight: "900",
+    fontSize: 12,
+    color: "gray",
+    //color: "#2196F3",
   },
 });
 

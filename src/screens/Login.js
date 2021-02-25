@@ -14,8 +14,8 @@ import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
 
 const Login = ({ navigation }) => {
-  const [myemail, setEmail] = useState("dania1@soop.io");
-  const [mypassword, setPassword] = useState("password");
+  const [myemail, setEmail] = useState("");
+  const [mypassword, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
 
   async function checkLogin() {
@@ -47,6 +47,7 @@ const Login = ({ navigation }) => {
           navigation.navigate("HomeScreen", {
             id: responseJson.data.owner.id,
             obj: responseJson.data.owner,
+            s_name:responseJson.data.school_name,
           });
         } else {
           setEmail("");

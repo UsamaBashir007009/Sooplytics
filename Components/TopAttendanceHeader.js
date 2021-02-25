@@ -18,7 +18,7 @@ const TopAttendanceHeader = (props) => {
         <View>
           <Text
             style={{
-              fontSize: 30,
+              fontSize: 25,
               color: "gray",
               fontWeight: "200",
               fontWeight: "bold",
@@ -54,7 +54,7 @@ const TopAttendanceHeader = (props) => {
         <View>
           <Text
             style={{
-              fontSize: 30,
+              fontSize: 25,
               fontWeight: "bold",
               color: "red",
               opacity: 0.7,
@@ -87,7 +87,7 @@ const TopAttendanceHeader = (props) => {
         <View>
           <Text
             style={{
-              fontSize: 30,
+              fontSize: 25,
               fontWeight: "200",
               fontWeight: "bold",
 
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    margin: 5,
+    margin: 10,
     elevation: 10,
     borderRadius: 20,
   },

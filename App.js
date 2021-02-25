@@ -1,5 +1,8 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import AdmissionsScreen from "./src/screens/AdmissionsScreen";
+import BranchAdmissions from "./src/screens/BranchAdmissions";
+import BranchCollections from "./src/screens/BranchCollections";
 import BranchDefaulters from "./src/screens/BranchDefaulters";
 import BranchStaffAttendance from "./src/screens/BranchStaffAttendance";
 import BranchTeacherAttendance from "./src/screens/BranchTeacherAttendance";
@@ -89,6 +92,36 @@ const navigator = createStackNavigator(
       screen: BranchDefaulters,
       navigationOptions: {
         title: "Branch Defaulters",
+        headerStyle: {
+          backgroundColor: "#fff",
+        },
+        headerTintColor: "#000",
+      },
+    },
+    branchCollection:{
+      screen: BranchCollections,
+      navigationOptions: {
+        title: "Branch Collection",
+        headerStyle: {
+          backgroundColor: "#fff",
+        },
+        headerTintColor: "#000",
+      },
+    },
+    Admission:{
+      screen: AdmissionsScreen,
+      navigationOptions: {
+        title: "Admissions",
+        headerStyle: {
+          backgroundColor: "#fff",
+        },
+        headerTintColor: "#000",
+      },
+    },
+    BAdmission:{
+      screen: BranchAdmissions,
+      navigationOptions: {
+        title: "Admissions",
         headerStyle: {
           backgroundColor: "#fff",
         },
