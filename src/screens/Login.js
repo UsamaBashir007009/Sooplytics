@@ -18,14 +18,25 @@ const Login = ({ navigation }) => {
   const [myemail, setEmail] = useState("");
   const [mypassword, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
+  let em="",ps="";
   async function save(key, value) {
     await SecureStore.setItemAsync(key, value);
   }
 
   async function getValueFor() {
     em = await SecureStore.getItemAsync("email");
+    
+    // console.log("1---"+em);
+    // em = await SecureStore.getItemAsync("email");
+    // console.log("2---"+em);
+
     ps = await SecureStore.getItemAsync("password");
+    console.log(em);
+
     if ((em != null && ps != null) && (em != "")) {
+      
+      save("email", em);
+      save("password", ps);
       setPassword(ps)
       setEmail(em)
       setLoader(true);
@@ -39,8 +50,8 @@ const Login = ({ navigation }) => {
         .then((responseJson) => {
           if (responseJson.success === true) {
             console.log(responseJson);
-            save("email", myemail);
-            save("password", mypassword);
+            // save("email", myemail);
+            // save("password", mypassword);
             setEmail("");
             setPassword("");
             navigation.navigate("HomeScreen", {
