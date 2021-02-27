@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import {
   ActivityIndicator,
@@ -99,6 +99,14 @@ const Collections = ({ navigation }) => {
 
     setLoader(false);
   }
+  useEffect(() => {
+    const d=new Date();
+    handleConfirm2(d);
+    d.setDate(1)
+    handleConfirm(d);
+    
+  
+  }, []);
 
   return (
     <View style={{ height: "100%" }}>

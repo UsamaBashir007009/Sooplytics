@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ActivityIndicator, FlatList,Pressable, TouchableOpacity, Image, Alert } from 'react-native'
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -97,6 +97,14 @@ const AdmissionsScreen = ({navigation}) => {
         setLoader(false);
       }
     
+      useEffect(() => {
+        const d=new Date();
+        handleConfirm2(d);
+        d.setDate(1)
+        handleConfirm(d);
+        
+      
+      }, []);
     return (
         <View style={styles.container}>
             <AdmissionHeader val1={total} val2={admitted} val3={pending}/>

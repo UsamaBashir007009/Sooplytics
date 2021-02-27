@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import {
   ActivityIndicator,
@@ -17,6 +17,7 @@ const TeacherAttendance = ({ navigation }) => {
   const myid = navigation.getParam("id");
   const [items, setItems] = React.useState([]);
   const [x, setx] = useState("Pick a Date");
+  const d=new Date();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [overAllpercentage, setoverAllPercentage] = useState("0");
   const [loader, setLoader] = useState(false);
@@ -70,7 +71,10 @@ const TeacherAttendance = ({ navigation }) => {
     setDatePickerVisibility(false);
     getdata(x);
   };
-
+  useEffect(() => {
+    // setx(d.getFullYear() +"-"+(d.getMonth()+1)+"-"+d.getDate())
+    handleConfirm(d)
+ }, []);
   return (
     <View style={styles.container}>
       <TopAttendanceHeader absent={overAllpercentage.total_absent} present={overAllpercentage.total_present} leave={overAllpercentage.total_on_leave} />
